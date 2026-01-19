@@ -26,7 +26,7 @@ export default function Corporate() {
         </div>
 
         {/* Image Grid */}
-        <div className="grid grid-cols-2 gris-rows-6 md:grid-cols-3 md:grid-rows-3 gap-2 md:gap-4 max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-2 grid-rows-6 md:grid-cols-3 md:grid-rows-3 gap-2 md:gap-4 max-w-7xl mx-auto w-full">
 
           {/* BIG CARD */}
           <div className="overflow-hidden rounded-lg md:rounded-xl col-span-2 row-span-2">

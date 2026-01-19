@@ -35,8 +35,9 @@ export default function Hero() {
   }, [current])
 
   return (
-    <section id="home" className="relative lg:min-h-screen text-white flex items-center overflow-hidden">
+    // <section id="home" className="relative lg:min-h-screen text-white flex items-center overflow-hidden">
 
+    <section id="home" className="relative w-screen min-h-[60vh] lg:min-h-[100vh] flex items-center justify-center text-white overflow-hidden">
       {/* BACKGROUND SLIDES */}
       <div className="absolute inset-0">
         {images.map((img, index) => (
