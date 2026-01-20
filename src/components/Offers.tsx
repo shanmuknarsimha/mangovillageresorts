@@ -47,7 +47,7 @@ export default function TouristAttractions() {
   const [index, setIndex] = useState(0)
   const [direction, setDirection] = useState<"left" | "right">("right")
   const [exiting, setExiting] = useState(false)
-  const [elasticDir, setElasticDir] = useState<null | "left" | "right">(null)
+  const [elasticDir, setElasticDir] = useState<null | "right" | "left">(null)
   const [history, setHistory] = useState<number[]>([])
   const [restoring, setRestoring] = useState(false)
   const touchStartX = useRef<number | null>(null)
@@ -102,8 +102,8 @@ export default function TouristAttractions() {
   const handleTouchEnd = (e: React.TouchEvent) => {
     if (!touchStartX.current || exiting) return
     const diff = touchStartX.current - e.changedTouches[0].clientX
-    if (diff > 50) startTransition("left")
-    if (diff < -50) startTransition("right")
+    if (diff > 50) startTransition("right")
+    if (diff < -50) startTransition("left")
     touchStartX.current = null
   }
 
@@ -174,20 +174,22 @@ export default function TouristAttractions() {
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
+          {history.length > 0 && (
           <button
             onClick={() => startTransition("left")}
             className="absolute -left-4 top-1/2 -translate-y-1/2 z-40 bg-white shadow-lg border border-gold/40 rounded-full p-2"
           >
             <ChevronLeft className="w-5 h-5 text-gold" />
           </button>
-
+          )}
+          {index < attractions.length - 1 && (
           <button
             onClick={() => startTransition("right")}
             className="absolute -right-4 top-1/2 -translate-y-1/2 z-40 bg-white shadow-lg border border-gold/40 rounded-full p-2"
           >
             <ChevronRight className="w-5 h-5 text-gold" />
           </button>
-
+          )}
           {/* STACK */}
           <div className="relative h-[720px] md:h-[540px] flex items-center justify-center">
             {[0, 1, 2, 3].map((offset) => {
@@ -198,7 +200,7 @@ export default function TouristAttractions() {
 
               const elastic =
                 isActive && !exiting && elasticDir
-                  ? elasticDir === "left"
+                  ? elasticDir === "right"
                     ? "-translate-x-8 scale-[0.98]"
                     : "translate-x-8 scale-[0.98]"
                   : ""
@@ -210,13 +212,13 @@ export default function TouristAttractions() {
                     absolute w-full max-w-5xl
                     transition-transform duration-500 ease-in-out
                     ${isActive ? "z-30 scale-100 opacity-100" : ""}
-                    ${isActive && exiting && direction === "right" ? "translate-x-full" : ""}
+                    ${isActive && exiting && direction === "right" ? "-translate-x-full" : ""}
                     ${isActive && !exiting && restoring && direction === "right"
-                      ? "translate-x-full"
+                      ? "-translate-x-full"
                       : ""
                     }
                     ${offset === 1 && exiting && direction === "left"
-                      ? "-translate-x-full"
+                      ? "translate-x-full"
                       : ""
                     }
                     ${offset === 1 && "z-20 scale-[0.96] opacity-90 -translate-y-[24px]"}
