@@ -18,8 +18,8 @@ import newinterior from "../assets/gallery/newInterior.webp"
 import lxryhomesitting from "../assets/gallery/lxryhomesitting.webp"
 import lxryhomeblkny from "../assets/gallery/lxryhomeblkny.webp"
 import premiumsuites from "../assets/gallery/lxrysuites.webp";
-import canopybed from "../assets/gallery/canopybed.webp"
-import vintagechairs from "../assets/gallery/vintagechairs.webp"
+import canopybed from "../assets/gallery/canopybed.webp";
+import vintagechairs from "../assets/gallery/vintagechairs.webp";
 
 export default function Cottages() {
   const cottages = [

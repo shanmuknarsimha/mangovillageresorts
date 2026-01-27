@@ -8,6 +8,7 @@ import Dining from '../components/Dining';
 import Activities from '../components/Activities';
 import Offers from '../components/Offers';
 import Gallery from '../components/Gallery';
+// import Carousel from '../components/carousel';
 import Social from '../components/Social';
 import Testimonials from '../components/Testimonials';
 import Footer from '../components/Footer';
@@ -25,6 +26,7 @@ function HomePage() {
       <Activities />
       <Offers />
       <Gallery />
+      {/* <Carousel /> */}
       <Social />
       <Testimonials />
       <Footer />

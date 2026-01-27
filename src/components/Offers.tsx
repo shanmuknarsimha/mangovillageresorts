@@ -1,4 +1,5 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
+
 import { ChevronLeft, ChevronRight, MapPin, Clock } from "lucide-react"
 
 import startIcon from "../assets/icon.png"
@@ -106,6 +107,26 @@ export default function TouristAttractions() {
     if (diff < -50) startTransition("left")
     touchStartX.current = null
   }
+  
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (exiting) return
+
+      if (e.key === "ArrowRight") {
+        startTransition("right")
+      }
+
+      if (e.key === "ArrowLeft") {
+        startTransition("left")
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown)
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown)
+    }
+  }, [exiting, index, history])
 
   const renderCard = (itemIndex: number) => {
     const item = attractions[itemIndex]
@@ -175,20 +196,20 @@ export default function TouristAttractions() {
           onTouchEnd={handleTouchEnd}
         >
           {history.length > 0 && (
-          <button
-            onClick={() => startTransition("left")}
-            className="absolute -left-4 top-1/2 -translate-y-1/2 z-40 bg-white shadow-lg border border-gold/40 rounded-full p-2"
-          >
-            <ChevronLeft className="w-5 h-5 text-gold" />
-          </button>
+            <button
+              onClick={() => startTransition("left")}
+              className="absolute -left-4 top-1/2 -translate-y-1/2 z-40 bg-white shadow-lg border border-gold/40 rounded-full p-2"
+            >
+              <ChevronLeft className="w-5 h-5 text-gold" />
+            </button>
           )}
           {index < attractions.length - 1 && (
-          <button
-            onClick={() => startTransition("right")}
-            className="absolute -right-4 top-1/2 -translate-y-1/2 z-40 bg-white shadow-lg border border-gold/40 rounded-full p-2"
-          >
-            <ChevronRight className="w-5 h-5 text-gold" />
-          </button>
+            <button
+              onClick={() => startTransition("right")}
+              className="absolute -right-4 top-1/2 -translate-y-1/2 z-40 bg-white shadow-lg border border-gold/40 rounded-full p-2"
+            >
+              <ChevronRight className="w-5 h-5 text-gold" />
+            </button>
           )}
           {/* STACK */}
           <div className="relative h-[720px] md:h-[540px] flex items-center justify-center">
